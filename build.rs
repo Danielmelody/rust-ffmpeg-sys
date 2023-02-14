@@ -381,12 +381,6 @@ fn build() -> io::Result<()> {
     Ok(())
 }
 
-#[cfg(not(target_env = "msvc"))]
-fn try_vcpkg(_statik: bool) -> Option<Vec<PathBuf>> {
-    None
-}
-
-#[cfg(target_env = "msvc")]
 fn try_vcpkg(statik: bool) -> Option<Vec<PathBuf>> {
     if !statik {
         env::set_var("VCPKGRS_DYNAMIC", "1");

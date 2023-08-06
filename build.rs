@@ -684,7 +684,7 @@ fn main() {
         vec![ffmpeg_dir.join("include")]
     } else if let Some(paths) = try_vcpkg(statik) {
         // vcpkg doesn't detect the "system" dependencies
-        if statik {
+        if statik && cfg!(platform = "windows") {
             if cfg!(feature = "avcodec") || cfg!(feature = "avdevice") {
                 println!("cargo:rustc-link-lib=ole32");
             }
@@ -740,6 +740,7 @@ fn main() {
             "AppKit",
             "AudioToolbox",
             "AVFoundation",
+            "CoreAudio",
             "CoreFoundation",
             "CoreGraphics",
             "CoreMedia",
